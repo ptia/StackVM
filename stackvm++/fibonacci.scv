@@ -1,0 +1,18 @@
+#FIBONACCI
+
+push 1
+dup
+printi
+push 1
+dup
+printi
+l: loop
+  dup
+  store 0
+  add
+  dup
+  store 1
+  printi
+  load 0
+  load 1
+jmp loop

@@ -1,0 +1,21 @@
+push 22
+push 3
+push 1
+runf foo
+printi
+stop
+
+defun foo(arg arg1, ...)
+  push 1
+  runf bar
+  ret
+
+defun bar(arg arg1, ...)
+  printstack
+  push 1
+  add
+  printi
+  printi
+  printstack
+  pop
+  ret

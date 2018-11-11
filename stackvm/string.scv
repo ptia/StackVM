@@ -1,0 +1,19 @@
+push 0
+push 10
+push 111
+push 108
+push 108
+push 101
+push 104
+runf prints
+stop
+
+defun prints
+  l: loop
+  dup
+  jz end
+    printc
+    jmp loop
+  l: end
+    pop
+    ret

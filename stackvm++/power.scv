@@ -1,0 +1,45 @@
+#POWER
+
+push 17
+push 0
+runf pwr
+printi
+stop
+
+#funzione potenza non ricorsiva
+defun pwr(arg base, arg exp)
+  auto result
+
+  pushfrom exp
+  jnz continue #if (exp == 0) {
+    pop
+    pop
+    pop
+    push 1
+    ret #return 1;}
+  
+  l: continue #else {
+  
+    push 1
+    popto result #result = 1;
+    
+    l: loop #do {
+    
+      pushfrom result
+      pushfrom base
+      mul
+      popto result #result *= base;
+      
+      pushfrom exp
+      push 1
+      sub
+      popto exp #exp--;
+      
+      pushfrom exp
+    jnz loop #} while(exp != 0);
+  
+  pushfrom result
+  popto 0
+  pop
+  pop
+  ret

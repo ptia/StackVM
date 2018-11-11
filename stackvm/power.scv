@@ -1,0 +1,34 @@
+#POWER
+
+push 17
+push 6
+runf pwr
+print
+stop
+
+#funzione potenza non ricorsiva
+defun pwr
+  #se l'esponente è 0 ret 1
+  dup
+  jnz continue
+    pop
+    pop
+    push 1
+    ret
+  
+  l: continue
+  store 0 #exp
+  store 1 #base
+  
+  push 1
+  l: loop
+    #si entra nel loop con il risultato dell'ultima moltiplicazione in cima allo stack
+    load 1 #carica base
+    mul #moltiplica base per ultimo risultato
+    load 0 #carica esponente
+    push 1
+    sub #decrementa esponte
+    dup
+    store 0 #salva esponente
+  jnz loop
+  ret

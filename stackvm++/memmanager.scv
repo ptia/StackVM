@@ -1,0 +1,38 @@
+runf init_memmanager
+push 3
+runf malloc
+printstack
+push 5
+runf malloc
+printstack
+push 1
+runf malloc
+printstack
+stop
+
+
+#l'heap occupato cresce ad ogni chiamata a malloc,
+#free non è implementato
+#*0 è usato come puntatore al primo indirizzo libero
+
+defun init_memmanager()
+  push 1
+  store 0
+  ret
+  
+defun malloc(arg length)
+  auto result
+  load 0
+  popto result #result = *0
+  
+  load 0
+  pushfrom length
+  add
+  store 0 # *0 = *0 + length
+  
+  popto 0
+  ret #return result
+  
+defun free(arg ptr)
+  pop
+  ret

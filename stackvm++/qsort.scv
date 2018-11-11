@@ -1,0 +1,136 @@
+push 4
+store 1
+push -5
+store 2
+push 9
+store 3
+push 0
+store 4
+
+push 1
+printheap 4
+
+push 1
+push 0
+push 3
+runf qsort
+
+push 1
+printheap 4
+
+stop
+
+defun qsort(arg arr, arg left, arg right)
+  auto i
+  auto j
+  auto tmp
+  auto pivot
+  
+  pushfrom left
+  popto i
+  
+  pushfrom right
+  popto j
+  
+  pushfrom left
+  pushfrom right
+  add
+  push 2
+  div           #tos = (left + right) / 2;
+  pushfrom arr
+  add           #tos = arr + (left + right) / 2;
+  load *tos
+  popto pivot   #pivot = arr[(left + right) / 2];
+  
+  pushfrom pivot
+  printi
+  
+  l: partition_bgn
+  
+  pushfrom i
+  pushfrom j
+  cmp
+  push 1
+  cmp
+  jz partition_end #while (!(i > j)) {    
+    
+    l: i_incr_loop_begin
+    pushfrom i
+    pushfrom arr
+    add
+    load *tos
+    pushfrom pivot
+    cmp
+    push -1
+    cmp
+    jnz i_incr_loop_end #while(arr[i] < pivot) {
+      pushfrom i
+      push 1
+      add
+      popto i #i++;
+      jmp i_incr_loop_begin
+    l: i_incr_loop_end #}
+    
+    l: j_incr_loop_begin
+    pushfrom j
+    pushfrom arr
+    add
+    load *tos
+    pushfrom pivot
+    cmp
+    push 1
+    cmp
+    jnz j_incr_loop_end #while(arr[j] > pivot) {
+      pushfrom j
+      push 1
+      sub
+      popto j #j--;
+      jmp j_incr_loop_begin
+    l: j_incr_loop_end #}
+    
+    pushfrom i
+    pushfrom j
+    cmp
+    push 1
+    cmp
+    jz partition_bgn #if(i > j) continue;
+    #else
+      pushfrom arr
+      pushfrom i
+      add
+      load *tos
+      popto tmp #tmp = arr[i];
+      
+      pushfrom arr
+      pushfrom j
+      add
+      load *tos
+      pushfrom arr
+      pushfrom i
+      add
+      store *tos #arr[i] = arr[j];
+      
+      pushfrom tmp      
+      pushfrom arr
+      pushfrom j
+      add
+      store *tos #arr[j] = tmp;
+      
+      pushfrom i
+      push 1
+      add
+      dup
+      printi
+      popto i #i++;
+      
+      pushfrom j
+      push 1
+      sub
+      popto i #j--;
+    
+    jmp partition_bgn
+    
+  l: partition_end #}
+  
+  #todo recursion
+  ret

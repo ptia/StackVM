@@ -1,0 +1,20 @@
+push 0
+push 10
+push '!'
+push 'o'
+push 'l'
+push 'l'
+push 'e'
+push 'h'
+runf prints
+stop
+
+defun prints
+  l: loop
+  dup
+  jz end
+    printc
+    jmp loop
+  l: end
+    pop
+    ret

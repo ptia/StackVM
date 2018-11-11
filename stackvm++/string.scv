@@ -1,0 +1,48 @@
+push 4 #indirizzo d'inizio
+push 0
+push 10
+push 'o'
+push 'l'
+push 'l'
+push 'e'
+push 'h'
+runf heaps
+push 4
+runf prints
+stop
+
+#sposta un'array di lunghezza (arg #0) dallo stack all'heap a partire dall'indirizzo (arg #1)
+#todo
+
+#sposta una stringa terminata da 0 dallo stack all'heap a partire dall'indirizzo (arg #0)
+defun heaps(...)
+  l: heapsloop
+    dup
+    jz saveterminator
+      pushfrom 0
+      store *tos
+      pushfrom 0
+      push 1
+      add
+      popto 0
+    jmp heapsloop
+  l: saveterminator
+    pushfrom 0
+    store *tos
+    pop
+    ret
+  
+
+defun prints(1)
+  l: printsloop
+    dup
+    load *tos
+    dup
+    jz printsend
+      printc
+      push 1
+      add
+    jmp printsloop
+  l: printsend
+    pop
+    ret

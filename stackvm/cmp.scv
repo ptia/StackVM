@@ -1,0 +1,55 @@
+push -3
+runf abs
+print
+stop
+
+defun abs
+  dup
+  runf check_positivo
+  jnz positivo
+    push -1
+    mul
+    ret
+  l: positivo
+    ret
+
+
+defun cmp
+  sub
+  dup
+  jnz nonzero
+    pop
+    push 0
+    ret
+  l: nonzero
+    runf check_positivo
+    jnz maggiore
+      push -1
+      ret
+    l: maggiore
+      push 1
+      ret
+  
+
+defun check_positivo
+  dup
+  push 2
+  mod
+  dup
+  jnz dispari
+    pop
+    push 1
+    sub
+    runf check_positivo
+    ret
+  l: dispari
+    push 1
+    add
+    jz minore
+      pop
+      push 1
+      ret
+    l: minore
+      pop
+      push 0
+      ret

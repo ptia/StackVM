@@ -1,5 +1,4 @@
-#ifndef STACKVM_H
-#define STACKVM_H
+#pragma once
 
 #define ERR(msg, args...) do {fprintf(stderr, msg, ## args); exit(1);} while(0);
 #define PERR(msg) do {fprintf(stderr, "Parse error in row %d: %s\n", ln, msg); exit(1);} while(0);
@@ -55,5 +54,3 @@ StepStack retstack;
 #include "stepstack.c"
 #include "intstack.c"
 #include "parser++.c"
-
-#endif

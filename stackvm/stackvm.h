@@ -1,4 +1,5 @@
-#ifndef STACKVM_H
+#pragma once
+
 #define STACKVM_H
 
 #define ERR(msg, args...) do {fprintf(stderr, msg, ## args); exit(1);} while(0);
@@ -45,5 +46,3 @@ StepStack retstack;
 #include "stepstack.c"
 #include "intstack.c"
 #include "parser.c"
-
-#endif
